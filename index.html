@@ -1,4 +1,4 @@
-<!-- plik: admin.html -->
+<!-- plik: index.html (w folderze aruyeq-admin) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,11 +98,10 @@
         setInterval(() => {
             console.clear();
             console.log("%cZATRZYMAJ SIĘ!", "color: #c8102e; font-size: 32px; font-weight: 900; font-family: sans-serif; text-shadow: 2px 2px 0 #000;");
-            console.log("%cTa konsola jest zablokowana. Każda próba manipulacji kodem zostanie zignorowana.", "color: #555; font-size: 16px; font-family: sans-serif;");
+            console.log("%cTa konsola jest zablokowana.", "color: #555; font-size: 16px; font-family: sans-serif;");
         }, 1000);
 
         // --- WARSTWA 2: ZASZYFROWANE DANE LOGOWANIA (SHA-256) ---
-        // Hash dla "admin" (użytkownik) i "admin" (hasło). Odszyfrowanie jest bardzo trudne.
         const _0x1a2b = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
         const _0x3c4d = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
 
@@ -115,7 +114,14 @@
         // --- WARSTWA 3: ZACIEMNIONA LOGIKA ---
         const _0xQ1 = document.getElementById.bind(document);
         const _0xQ2 = sessionStorage;
-        const _0xQ3 = localStorage;
+
+        // Ciasteczka między subdomenami
+        function _0xG(_0xN) {
+            const _0xV = `; ${document.cookie}`;
+            const _0xP = _0xV.split(`; ${_0xN}=`);
+            if (_0xP.length === 2) return _0xP.pop().split(';').shift();
+            return null;
+        }
 
         if (_0xQ2.getItem('a_auth') === 't') {
             _0xQ1('login-view').style.display = 'none';
@@ -153,10 +159,21 @@
         });
 
         function _0xR7() {
-            const _0xL = JSON.parse(_0xQ3.getItem('aruyeq_consent_logs') || '[]');
+            // Pobieramy logi z localStorage (jeśli użytkownik testował na tej samej maszynie)
+            const _0xL = JSON.parse(localStorage.getItem('aruyeq_consent_logs') || '[]');
             const _0xT = _0xQ1('logs-table-body');
             const _0xEmp = _0xQ1('empty-state');
             const _0xTab = _0xT.closest('table');
+
+            // Dodatkowo odczytujemy ostatni wybór z ciasteczka (jeśli istnieje)
+            const _0xC = _0xG('aruyeq_cookie_consent');
+            if (_0xC) {
+                // Jeśli użytkownik zaakceptował na innej podstronie, dodajemy go na początek, jeśli nie ma go w logach
+                const alreadyLogged = _0xL.some(x => x.choice === _0xC && new Date(x.timestamp).toDateString() === new Date().toDateString());
+                if (!alreadyLogged) {
+                    _0xL.push({ timestamp: new Date().toISOString(), sessionId: 'cookie-based', choice: _0xC });
+                }
+            }
             
             _0xQ1('stat-total').innerText = _0xL.length;
             _0xQ1('stat-all').innerText = _0xL.filter(x => x.choice === 'all').length;
