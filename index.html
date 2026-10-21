@@ -1,207 +1,128 @@
-<!-- plik: index.html (w folderze aruyeq-admin) -->
+<!-- plik: admin.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Admin | ARUYEQ</title>
+    <title>Admin Notes | ARUYEQ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-base: #faf9f6; --text-main: #1a1a1a; --text-muted: #555555; --navy: #2b2b8a; --navy-light: #3a3aa0; --red: #c8102e; --white: #ffffff; --surface: #ffffff; --border-color: #eaeaea; --shadow-sm: 0 2px 8px rgba(0,0,0,0.04); --shadow-lg: 0 12px 32px rgba(0,0,0,0.08); --radius: 12px; --font-main: 'Inter', system-ui, -apple-system, sans-serif; --transition: all 0.2s ease; }
+        :root { --bg-base: #faf9f6; --text-main: #1a1a1a; --text-muted: #555555; --navy: #2b2b8a; --navy-light: #3a3aa0; --red: #c8102e; --white: #ffffff; --surface: #ffffff; --border-color: #eaeaea; --shadow-lg: 0 12px 32px rgba(0,0,0,0.08); --radius: 12px; --font-main: 'Inter', system-ui, -apple-system, sans-serif; --transition: all 0.2s ease; }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-main); background-color: var(--bg-base); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 2rem 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
         
-        .card { width: 100%; max-width: 800px; background: var(--surface); padding: 2.5rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); position: relative; }
+        .card { width: 100%; max-width: 600px; background: var(--surface); padding: 2.5rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
         
         #login-view { display: block; max-width: 400px; margin: 0 auto; }
         .login-header { text-align: center; margin-bottom: 2rem; }
         .login-header h1 { color: var(--navy); font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; }
-        .login-header p { color: var(--text-muted); font-size: 0.9rem; }
         .input-group { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
-        .input-group input { padding: 1rem; border: 1px solid var(--border-color); border-radius: 8px; font-family: var(--font-main); font-size: 0.95rem; outline: none; transition: var(--transition); }
+        .input-group input { padding: 1rem; border: 1px solid var(--border-color); border-radius: 8px; font-family: var(--font-main); font-size: 0.95rem; outline: none; }
         .input-group input:focus { border-color: var(--navy); }
-        .btn { width: 100%; padding: 1rem; background: var(--navy); color: var(--white); border: none; border-radius: 8px; font-family: var(--font-main); font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition); }
+        .btn { width: 100%; padding: 1rem; background: var(--navy); color: var(--white); border: none; border-radius: 8px; font-family: var(--font-main); font-weight: 600; cursor: pointer; transition: var(--transition); }
         .btn:hover { background: var(--navy-light); }
         .error { color: var(--red); font-size: 0.85rem; margin-top: 0.5rem; display: none; text-align: center; }
 
         #dashboard-view { display: none; }
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem; }
-        .dashboard-header h2 { color: var(--navy); font-size: 1.5rem; }
-        .logout-btn { background: var(--red); color: var(--white); border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: var(--transition); }
-        .logout-btn:hover { background: #a00d25; }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: #fcfcfc; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; text-align: center; }
-        .stat-card h3 { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
-        .stat-card p { font-size: 1.8rem; font-weight: 800; color: var(--navy); }
-
-        .table-wrapper { overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { background: #fcfcfc; padding: 1rem; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
-        td { padding: 1rem; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-main); }
-        tr:last-child td { border-bottom: none; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+        .header h2 { color: var(--navy); font-size: 1.2rem; }
+        .logout-btn { background: var(--red); color: var(--white); border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
         
-        .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
-        .badge-all { background: #e0e4ff; color: var(--navy); }
-        .badge-necessary { background: #ffe0e4; color: var(--red); }
-        .badge-none { background: #eee; color: var(--text-muted); }
-        .empty-state { text-align: center; padding: 3rem; color: var(--text-muted); }
-
-        @media (max-width: 480px) { .card { padding: 1.5rem; } .dashboard-header { flex-direction: column; gap: 1rem; align-items: flex-start; } }
+        textarea {
+            width: 100%; height: 300px; padding: 1rem; border: 1px solid var(--border-color);
+            border-radius: 8px; font-family: monospace; font-size: 0.95rem; line-height: 1.6;
+            resize: vertical; outline: none; background: #fcfcfc;
+        }
+        textarea:focus { border-color: var(--navy); background: #fff; }
+        
+        .status { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right; height: 1rem; }
     </style>
 </head>
 <body>
 
     <div class="card">
+        <!-- LOGIN -->
         <div id="login-view">
-            <div class="login-header"><h1>ADMIN</h1><p>System Authorization</p></div>
+            <div class="login-header"><h1>ADMIN</h1></div>
             <div class="input-group">
-                <input type="text" id="username" placeholder="Identifier" autocomplete="off">
-                <input type="password" id="password" placeholder="Access Key" autocomplete="off">
+                <input type="text" id="username" placeholder="Login" autocomplete="off">
+                <input type="password" id="password" placeholder="Hasło" autocomplete="off">
             </div>
-            <button class="btn" id="login-btn">Verify</button>
-            <div class="error" id="error-msg">Access denied. Invalid credentials.</div>
+            <button class="btn" id="login-btn">Zaloguj</button>
+            <div class="error" id="error-msg">Błędne dane logowania.</div>
         </div>
 
+        <!-- NOTES -->
         <div id="dashboard-view">
-            <div class="dashboard-header">
-                <h2>Cookie Consent Logs</h2>
-                <button class="logout-btn" id="logout-btn">Logout</button>
+            <div class="header">
+                <h2>Prywatne Notatki</h2>
+                <button class="logout-btn" id="logout-btn">Wyloguj</button>
             </div>
-            <div class="stats-grid">
-                <div class="stat-card"><h3>Total Visits</h3><p id="stat-total">0</p></div>
-                <div class="stat-card"><h3>Accepted All</h3><p id="stat-all">0</p></div>
-                <div class="stat-card"><h3>Only Necessary</h3><p id="stat-necessary">0</p></div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead><tr><th>Timestamp</th><th>Session ID</th><th>Choice</th></tr></thead>
-                    <tbody id="logs-table-body"></tbody>
-                </table>
-                <div class="empty-state" id="empty-state" style="display: none;">No consent data recorded yet.</div>
-            </div>
+            <textarea id="notes" placeholder="Wpisz swoje notatki tutaj... Zapisuje się automatycznie."></textarea>
+            <div class="status" id="status"></div>
         </div>
     </div>
 
     <script>
-        // --- WARSTWA 1: OCHRONA PRZED DEVTOOLS ---
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                return false;
-            }
-        });
-        setInterval(() => {
-            console.clear();
-            console.log("%cZATRZYMAJ SIĘ!", "color: #c8102e; font-size: 32px; font-weight: 900; font-family: sans-serif; text-shadow: 2px 2px 0 #000;");
-            console.log("%cTa konsola jest zablokowana.", "color: #555; font-size: 16px; font-family: sans-serif;");
-        }, 1000);
+        const NOTES_KEY = 'aruyeq_admin_notes';
+        const AUTH_KEY = 'aruyeq_admin_session';
 
-        // --- WARSTWA 2: ZASZYFROWANE DANE LOGOWANIA (SHA-256) ---
-        const _0x1a2b = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
-        const _0x3c4d = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
-
-        async function _0x5e6f(_0x7a8b) {
-            const _0x9c0d = new TextEncoder().encode(_0x7a8b);
-            const _0x1e2f = await crypto.subtle.digest('SHA-256', _0x9c0d);
-            return Array.from(new Uint8Array(_0x1e2f)).map(_0x3a4b => _0x3a4b.toString(16).padStart(2, '0')).join('');
-        }
-
-        // --- WARSTWA 3: ZACIEMNIONA LOGIKA ---
-        const _0xQ1 = document.getElementById.bind(document);
-        const _0xQ2 = sessionStorage;
-
-        // Ciasteczka między subdomenami
-        function _0xG(_0xN) {
-            const _0xV = `; ${document.cookie}`;
-            const _0xP = _0xV.split(`; ${_0xN}=`);
-            if (_0xP.length === 2) return _0xP.pop().split(';').shift();
-            return null;
-        }
-
-        if (_0xQ2.getItem('a_auth') === 't') {
-            _0xQ1('login-view').style.display = 'none';
-            _0xQ1('dashboard-view').style.display = 'block';
-            _0xR7();
-        }
-
-        _0xQ1('login-btn').addEventListener('click', async () => {
-            const _0xU = _0xQ1('username').value;
-            const _0xP = _0xQ1('password').value;
-            const _0xE = _0xQ1('error-msg');
-
-            const _0xHU = await _0x5e6f(_0xU);
-            const _0xHP = await _0x5e6f(_0xP);
-
-            if (_0xHU === _0x1a2b && _0xHP === _0x3c4d) {
-                _0xQ2.setItem('a_auth', 't');
-                _0xE.style.display = 'none';
-                _0xQ1('login-view').style.display = 'none';
-                _0xQ1('dashboard-view').style.display = 'block';
-                _0xR7();
+        // Autoryzacja (prosta, po stronie klienta)
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            if (u === 'admin' && p === 'admin') {
+                sessionStorage.setItem(AUTH_KEY, 'true');
+                document.getElementById('login-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                loadNotes();
             } else {
-                _0xE.style.display = 'block';
-                setTimeout(() => { _0xE.style.display = 'none'; }, 3000);
+                const err = document.getElementById('error-msg');
+                err.style.display = 'block';
+                setTimeout(() => err.style.display = 'none', 3000);
             }
         });
 
-        _0xQ1('password').addEventListener('keypress', (e) => { if (e.key === 'Enter') _0xQ1('login-btn').click(); });
-        _0xQ1('logout-btn').addEventListener('click', () => {
-            _0xQ2.removeItem('a_auth');
-            _0xQ1('dashboard-view').style.display = 'none';
-            _0xQ1('login-view').style.display = 'block';
-            _0xQ1('username').value = '';
-            _0xQ1('password').value = '';
+        document.getElementById('password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('login-btn').click();
         });
 
-        function _0xR7() {
-            // Pobieramy logi z localStorage (jeśli użytkownik testował na tej samej maszynie)
-            const _0xL = JSON.parse(localStorage.getItem('aruyeq_consent_logs') || '[]');
-            const _0xT = _0xQ1('logs-table-body');
-            const _0xEmp = _0xQ1('empty-state');
-            const _0xTab = _0xT.closest('table');
+        // Wylogowanie
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            sessionStorage.removeItem(AUTH_KEY);
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('login-view').style.display = 'block';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
 
-            // Dodatkowo odczytujemy ostatni wybór z ciasteczka (jeśli istnieje)
-            const _0xC = _0xG('aruyeq_cookie_consent');
-            if (_0xC) {
-                // Jeśli użytkownik zaakceptował na innej podstronie, dodajemy go na początek, jeśli nie ma go w logach
-                const alreadyLogged = _0xL.some(x => x.choice === _0xC && new Date(x.timestamp).toDateString() === new Date().toDateString());
-                if (!alreadyLogged) {
-                    _0xL.push({ timestamp: new Date().toISOString(), sessionId: 'cookie-based', choice: _0xC });
-                }
-            }
+        // Notatnik (autosave)
+        function loadNotes() {
+            const notes = localStorage.getItem(NOTES_KEY) || '';
+            document.getElementById('notes').value = notes;
+        }
+
+        let saveTimeout;
+        document.getElementById('notes').addEventListener('input', (e) => {
+            const status = document.getElementById('status');
+            status.textContent = 'Zapisywanie...';
             
-            _0xQ1('stat-total').innerText = _0xL.length;
-            _0xQ1('stat-all').innerText = _0xL.filter(x => x.choice === 'all').length;
-            _0xQ1('stat-necessary').innerText = _0xL.filter(x => x.choice === 'necessary').length;
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                localStorage.setItem(NOTES_KEY, e.target.value);
+                status.textContent = 'Zapisano.';
+                setTimeout(() => { status.textContent = ''; }, 2000);
+            }, 500); // Debounce 500ms
+        });
 
-            if (_0xL.length === 0) {
-                _0xTab.style.display = 'none';
-                _0xEmp.style.display = 'block';
-                return;
-            }
-
-            _0xTab.style.display = 'table';
-            _0xEmp.style.display = 'none';
-            _0xT.innerHTML = '';
-
-            _0xL.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).forEach(x => {
-                const _0xTr = document.createElement('tr');
-                let _0xB = 'badge-none';
-                if (x.choice === 'all') _0xB = 'badge-all';
-                if (x.choice === 'necessary') _0xB = 'badge-necessary';
-
-                _0xTr.innerHTML = `
-                    <td>${new Date(x.timestamp).toLocaleString()}</td>
-                    <td style="font-family: monospace; color: var(--text-muted);">${x.sessionId}</td>
-                    <td><span class="badge ${_0xB}">${x.choice.toUpperCase()}</span></td>
-                `;
-                _0xT.appendChild(_0xTr);
-            });
+        // Sprawdź sesję przy starcie
+        if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+            document.getElementById('login-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            loadNotes();
         }
     </script>
 </body>
